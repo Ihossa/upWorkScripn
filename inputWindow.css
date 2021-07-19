@@ -1,0 +1,24 @@
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+#errorMessage {
+    font-size: 10px;
+    color: red;
+    font-style: italic;
+    text-decoration: underline;
+}
+.image{
+    width: 20px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+.link{
+    background-color: rgba(255, 255, 0, 0.178);
+}
