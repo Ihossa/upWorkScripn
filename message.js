@@ -1,10 +1,11 @@
 
+
 document.addEventListener("load", function () {
     var els = document.querySelector('[name="coverLetter"]');
     console.log(els);
   });
 window.onload = function(){
-
+   let ev = new Event('input');
     chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
        console.log(message);
        message.forEach((el) => {
@@ -13,9 +14,9 @@ window.onload = function(){
             setTimeout(() => console.dir(document.querySelector("#coverLetter")), 10000) 
             setTimeout(() => document.querySelector("#main > div.ng-scope > div > div > form > div > div:nth-child(4) > section > div > div:nth-child(1) > div:nth-child(3)>textarea").value = el.text, 10000)
             setTimeout(() => document.querySelector("#coverLetter").focus(), 10000)
-            setTimeout(() => document.querySelector("#coverLetter").dispatchEvent('input'), 10000);
+            setTimeout(() => document.querySelector("#coverLetter").dispatchEvent(ev), 10000);
             setTimeout(() => document.querySelector("#main > div.ng-scope > div > div > form > div > div:nth-child(4) > footer > a.btn.btn-primary.m-0.ng-scope").click(), 10000);
-            setTimeout(() => document.querySelector("body > up-c-modal > div.ng-scope > div > label > input").click(), 15000);
+            // setTimeout(() => document.querySelector("body > up-c-modal > div.ng-scope > div > label > input").click(), 15000);
             // setTimeout(() => document.querySelector("body > up-c-modal > div:nth-child(3) > div > button.btn.btn-primary.m-0").click(), 15000);
             
             sendResponse({farewell: el.url})
