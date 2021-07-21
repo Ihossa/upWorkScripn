@@ -8,20 +8,21 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     chrome.tabs.create({url: element.url});
   });
 });
-
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-  chrome.tabs.sendMessage(tabId, resourse, function(response) {
-    console.log(`${response.farewell} is done`);
-    completeMessage.push(response.farewell)
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if(message.hasOwnProperty('el')){
+    console.log(message)
     chrome.tabs.query({active: true, currentWindow: true},function(tabs) {
       chrome.runtime.sendMessage({
         msg: "something_completed", 
         data: {
-            content: response.farewell
+            content: message
         }
       }); 
     });
-  });
+  }
+});
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+  chrome.tabs.sendMessage(tabId, resourse);
 })
 
 

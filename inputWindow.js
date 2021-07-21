@@ -11,12 +11,18 @@ setTimeout(() => chrome.storage.sync.get("completeMessage", ({ completeMessage }
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
       if (request.msg === "something_completed") {
-          console.log(request.data.content)
+        console.log(request.data.content)
         contentBlock.childNodes.forEach((el) => {
-              if(el.textContent === request.data.content){
-                el.style.background = "#bbffb9"
-                console.dir(el.children[0].style.display = 'none')
-                el.innerHTML += '<img class = "image" src = "./done.png"  />'
+              if(el.textContent === request.data.content.el){
+                if(request.data.content.status === 'done'){
+                  el.style.background = "#bbffb9"
+                  el.children[0].style.display = 'none'
+                  el.innerHTML += '<img class = "image" src = "./done.png"  />'
+                }else{
+                  el.style.background = "#ce545441"
+                  el.children[0].style.display = 'none'
+                  el.innerHTML += '<img class = "image" src = "./error.png"  />'
+                }
               }
           })
       }
