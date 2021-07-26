@@ -23,31 +23,25 @@ document.addEventListener("load", function () {
                      document.querySelector("#coverLetter").value = el.text
                      document.querySelector("#coverLetter").focus()
                      document.querySelector("#coverLetter").dispatchEvent(ev)
-                     // document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope").click()
-                     // document.querySelector("body > up-c-modal > div.ng-scope > div > label > input").click()
+                     document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope").click()
+                     document.querySelector("body > up-c-modal > div.ng-scope > div > label > input").click()
                      // document.querySelector("body > up-c-modal > div:nth-child(3) > div > button.btn.btn-primary.m-0").click()
                      // res("done")
                      return 'done'
                   }else{
                      if(counter < 60000){
+                        console.log(counter)
                         let promise = new Promise((res) => {
                            setTimeout(() => {
-                              if (document.querySelector("#coverLetter") && document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope")) {
-                                 console.dir(document.querySelector("#coverLetter"))
-                                 document.querySelector("#coverLetter").value = el.text
-                                 document.querySelector("#coverLetter").focus()
-                                 document.querySelector("#coverLetter").dispatchEvent(ev)
-                                 // document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope").click()
-                                 // document.querySelector("body > up-c-modal > div.ng-scope > div > label > input").click()
-                                 // document.querySelector("body > up-c-modal > div:nth-child(3) > div > button.btn.btn-primary.m-0").click()
-                                 // res("done")
-                                 res('done')
-                              }},
+                                 res(func())
+                              },
                            1000);
                         })
+                        
                         return promise
                      }else{
-                        // res("rej")
+                        console.log(counter)
+                        let promise = new Promise((res) => res("rej"))
                         return 'rej'
                      }
                   }

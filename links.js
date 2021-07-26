@@ -6,7 +6,6 @@ window.onload = function(){
       data.forEach((el) => {
          if(el.url === window.location.href){
             console.log(el.text, document.querySelector("#submit-proposal-button-3"))
-
             await document.querySelector("#submit-proposal-button-3").click()
          }
       })
