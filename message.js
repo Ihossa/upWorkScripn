@@ -13,9 +13,9 @@ document.addEventListener("load", function () {
       
        message.forEach((el) => {
           const reg = /(?<=\~)([\s\S]+?)(?=\/)/
-          if(reg.exec(el.url)[0] === reg.exec(window.location.href)[0]){
+          if(el.jobId === reg.exec(window.location.href)[0]){
             let result = 'pand'
-            let myFunc = async() => {
+            let myFunc = async() => { 
                counter += 1000
                let func = () => {
                   if (document.querySelector("#coverLetter") && document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope")) {
@@ -23,8 +23,8 @@ document.addEventListener("load", function () {
                      document.querySelector("#coverLetter").value = el.text
                      document.querySelector("#coverLetter").focus()
                      document.querySelector("#coverLetter").dispatchEvent(ev)
-                     document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope").click()
-                     document.querySelector("body > up-c-modal > div.ng-scope > div > label > input").click()
+                     // document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope").click()
+                     // document.querySelector("body > up-c-modal > div.ng-scope > div > label > input").click()
                      // document.querySelector("body > up-c-modal > div:nth-child(3) > div > button.btn.btn-primary.m-0").click()
                      // res("done")
                      return 'done'
@@ -51,7 +51,7 @@ document.addEventListener("load", function () {
             }
             myFunc().then(data => {
                console.log(data)
-               chrome.runtime.sendMessage({el:el.url, status: data})
+               chrome.runtime.sendMessage({el:el.jobId, status: data})
             })
             
             

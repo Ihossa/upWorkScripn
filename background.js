@@ -5,7 +5,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   resourse = JSON.parse(message).data; 
   console.log(resourse)
   resourse.forEach(element => {
-    chrome.tabs.create({url: element.url});
+    chrome.tabs.create({url: `https://www.upwork.com/ab/proposals/job/~${element.jobId}/apply/#/`});
   });
 });
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {

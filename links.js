@@ -4,7 +4,7 @@ window.onload = function(){
    chrome.runtime.onMessage.addListener( async function(data) {
       console.log(data);
       data.forEach((el) => {
-         if(el.url === window.location.href){
+         if(el.jobId === window.location.href){
             console.log(el.text, document.querySelector("#submit-proposal-button-3"))
             await document.querySelector("#submit-proposal-button-3").click()
          }
