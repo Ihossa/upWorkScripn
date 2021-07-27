@@ -52,7 +52,7 @@ inputFile.addEventListener("change", async(el) => {
               el.innerHTML += '<img class = "image err" src = "../../assets/icons/error.png"  />'
             }
           })
-        }, 10000)
+        }, 20000)
     } else {
         errorMessage.innerHTML = '<span>download the correct JSON file</span>'
     }

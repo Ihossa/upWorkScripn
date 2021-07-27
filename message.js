@@ -23,7 +23,17 @@ document.addEventListener("load", function () {
                      document.querySelector("#coverLetter").value = el.text
                      document.querySelector("#coverLetter").focus()
                      document.querySelector("#coverLetter").dispatchEvent(ev)
-                     // document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope").click()
+                     if(document.querySelector("#question0")){
+                        document.querySelector("#question0").value = el.question0
+                        document.querySelector("#question0").focus()
+                        document.querySelector("#question0").dispatchEvent(ev)
+                     }
+                     if(document.querySelector("#question1")){
+                        document.querySelector("#question1").value = el.question1
+                        document.querySelector("#question1").focus()
+                        document.querySelector("#question1").dispatchEvent(ev)
+                     }
+                     document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope").click()
                      // document.querySelector("body > up-c-modal > div.ng-scope > div > label > input").click()
                      // document.querySelector("body > up-c-modal > div:nth-child(3) > div > button.btn.btn-primary.m-0").click()
                      // res("done")
