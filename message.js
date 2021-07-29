@@ -10,8 +10,12 @@ document.addEventListener("load", function () {
    let ev = new Event('input');
     chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
        console.log(message);
-      
        message.forEach((el) => {
+         let setValue = (idInput) => {
+            document.querySelector(`#${idInput}`).value = el[idInput]
+            document.querySelector(`#${idInput}`).focus()
+            document.querySelector(`#${idInput}`).dispatchEvent(ev)
+          }
           const reg = /(?<=\~)([\s\S]+?)(?=\/)/
           if(el.jobId === reg.exec(window.location.href)[0]){
             let result = 'pand'
@@ -19,20 +23,19 @@ document.addEventListener("load", function () {
                counter += 1000
                let func = () => {
                   if (document.querySelector("#coverLetter") && document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope")) {
-                     console.dir(document.querySelector("#coverLetter"))
-                     document.querySelector("#coverLetter").value = el.text
-                     document.querySelector("#coverLetter").focus()
-                     document.querySelector("#coverLetter").dispatchEvent(ev)
+
+                     setValue('coverLetter')
                      if(document.querySelector("#question0")){
-                        document.querySelector("#question0").value = el.question0
-                        document.querySelector("#question0").focus()
-                        document.querySelector("#question0").dispatchEvent(ev)
+                        setValue("question0")
                      }
                      if(document.querySelector("#question1")){
-                        document.querySelector("#question1").value = el.question1
-                        document.querySelector("#question1").focus()
-                        document.querySelector("#question1").dispatchEvent(ev)
+                        setValue("question1")
                      }
+
+                     console.dir(document.querySelector('.air-icon-exclamation'))
+                     document.querySelector("#main > div.ng-scope > div > div > form > div > div:nth-child(5) > section > div > up-c-dropdown > div > up-c-on-media-change > up-c-on-click-outside > up-c-transition > div > up-c-dropdown-toggle > button").click()
+                     console.dir(document.querySelector("up-c-transition"))
+
                      document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope").click()
                      // document.querySelector("body > up-c-modal > div.ng-scope > div > label > input").click()
                      // document.querySelector("body > up-c-modal > div:nth-child(3) > div > button.btn.btn-primary.m-0").click()
