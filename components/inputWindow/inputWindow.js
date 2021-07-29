@@ -11,7 +11,7 @@
           console.log(request.data.content)
           contentBlock.childNodes.forEach((el) => {
                 if(el.textContent === request.data.content.el){
-                  if(request.data.content.status === 'done'){
+                  if(request.data.content.status === 'done' && el.lastElementChild.classList[1] !== 'done'){
                     el.style.background = "#bbffb9"
                     el.children[0].style.display = 'none'
                     el.innerHTML += '<img class = "image done" src = "../../assets/icons/done.png"  />'

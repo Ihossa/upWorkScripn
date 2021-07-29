@@ -29,7 +29,7 @@ const setStatus = (el) => {
 
                      console.dir(document.querySelector('.air-icon-exclamation'))
                      // document.querySelector("#main > div.ng-scope > div > div > form > div > div:nth-child(5) > section > div > up-c-dropdown > div > up-c-on-media-change > up-c-on-click-outside > up-c-transition > div > up-c-dropdown-toggle > button").click()
-                     console.dir(document.querySelector("up-c-transition"))
+                     console.dir(document.querySelectorAll("up-c-dropdown")[0])
 
                      if(message.checked){
                         console.log('is Test version')
