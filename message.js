@@ -1,24 +1,19 @@
 
 let counter = 0;
-let setStatus = (el) => {
+const ev = new Event('input');
+const setStatus = (el) => {
    console.log(el)
 }
-document.addEventListener("load", function () {
-    var els = document.querySelector('[name="coverLetter"]');
-    console.log(els);
-  });
-   let ev = new Event('input');
     chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
        console.log(message);
-       message.forEach((el) => {
-         let setValue = (idInput) => {
+       message.data.forEach((el) => {
+         const setValue = (idInput) => {
             document.querySelector(`#${idInput}`).value = el[idInput]
             document.querySelector(`#${idInput}`).focus()
             document.querySelector(`#${idInput}`).dispatchEvent(ev)
           }
           const reg = /(?<=\~)([\s\S]+?)(?=\/)/
           if(el.jobId === reg.exec(window.location.href)[0]){
-            let result = 'pand'
             let myFunc = async() => { 
                counter += 1000
                let func = () => {
@@ -33,10 +28,16 @@ document.addEventListener("load", function () {
                      }
 
                      console.dir(document.querySelector('.air-icon-exclamation'))
-                     document.querySelector("#main > div.ng-scope > div > div > form > div > div:nth-child(5) > section > div > up-c-dropdown > div > up-c-on-media-change > up-c-on-click-outside > up-c-transition > div > up-c-dropdown-toggle > button").click()
+                     // document.querySelector("#main > div.ng-scope > div > div > form > div > div:nth-child(5) > section > div > up-c-dropdown > div > up-c-on-media-change > up-c-on-click-outside > up-c-transition > div > up-c-dropdown-toggle > button").click()
                      console.dir(document.querySelector("up-c-transition"))
 
-                     document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope").click()
+                     if(message.checked){
+                        console.log('is Test version')
+                     }else{
+                        document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope").click()
+                     }
+
+                     // document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope").click()
                      // document.querySelector("body > up-c-modal > div.ng-scope > div > label > input").click()
                      // document.querySelector("body > up-c-modal > div:nth-child(3) > div > button.btn.btn-primary.m-0").click()
                      // res("done")

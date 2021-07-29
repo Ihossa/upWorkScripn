@@ -1,10 +1,10 @@
-let color = 'blue';
-let resourse = [];
-let completeMessage = []
+
+let resourse = {};
+let resourseData = [];
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-  resourse = JSON.parse(message).data; 
-  console.log(resourse)
-  resourse.forEach(element => {
+  resourse = JSON.parse(message); 
+  resourseData = resourse.data;
+  resourseData.forEach(element => {
     chrome.tabs.create({url: `https://www.upwork.com/ab/proposals/job/~${element.jobId}/apply/#/`});
   });
 });
