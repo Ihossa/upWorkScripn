@@ -90,3 +90,8 @@ input[type="file"] {
       display: flex;
       text-align: center;
   }
+  #preview{
+    width: 50%;
+    margin: auto;
+    border-radius: 10px;
+  }

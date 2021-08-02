@@ -1,5 +1,5 @@
 
-let counter = 0;
+let timer = 0;
 const ev = new Event('input');
 const setStatus = (el) => {
    console.log(el)
@@ -14,9 +14,9 @@ const setStatus = (el) => {
           }
           const reg = /(?<=\~)([\s\S]+?)(?=\/)/
           if(el.jobId === reg.exec(window.location.href)[0]){
-            let myFunc = async() => { 
-               counter += 1000
-               let func = () => {
+            const updateState = async() => { 
+               timer += 1000
+               const sendMessage = () => {
                   if (document.querySelector("#coverLetter") && document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope")) {
 
                      setValue('coverLetter')
@@ -43,27 +43,24 @@ const setStatus = (el) => {
                      // res("done")
                      return 'done'
                   }else{
-                     if(counter < 60000){
-                        console.log(counter)
+                     if(timer < 60000){
+                        console.log(timer)
                         let promise = new Promise((res) => {
                            setTimeout(() => {
-                                 res(func())
+                                 res(sendMessage())
                               },
                            1000);
                         })
                         
                         return promise
-                     }else{
-                        console.log(counter)
-                        let promise = new Promise((res) => res("rej"))
-                        return 'rej'
                      }
+                     console.log(timer)
+                     return 'rej'
                   }
                }
-               let arr = await func()
-               return arr
+               return await sendMessage()
             }
-            myFunc().then(data => {
+            updateState().then(data => {
                console.log(data)
                chrome.runtime.sendMessage({el:el.jobId, status: data})
             })
