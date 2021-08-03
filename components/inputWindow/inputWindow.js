@@ -6,13 +6,16 @@
   const btnStart = document.getElementById('btnStart')
   const idTable = document.getElementById('idTable')
   var url = "https://docs.google.com/spreadsheets/d/1s1KioVJpwUoAZEW8LwCO2QTRrt1UDXn_MOOzfE46qwo/edit?usp=sharing";
-
   const dataObj = {data:[]}
   let allItems = ''
-  contentBlock.innerHTML = ''
+  
+  fetch(`https://spreadsheets.google.com/feeds/cells/1s1KioVJpwUoAZEW8LwCO2QTRrt1UDXn_MOOzfE46qwo/1/public/full?alt=json`)
+  .then((res) => res.json())
+  .then(data => console.log(data))
 
-
+  
   btnStart.addEventListener('click', () => {
+    contentBlock.innerHTML = ''
     console.dir(idTable.value)
     try{
       fetch(`https://spreadsheets.google.com/feeds/cells/${idTable.value}/1/public/full?alt=json`)

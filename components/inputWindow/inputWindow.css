@@ -1,13 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap');
+
+body{
+  /* font-family: 'Indie Flower', cursive; */
+  /* font-family: 'Cinzel', serif; */
+}
 input[type="file"] {
     display: none;
 }
 .custom-file-upload {
-    border: 1px solid #ccc;
+    border: 1px solid rgb(0, 185, 0);
+    border-radius: 20px;
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
 }
-
+.blockInput{
+  border: 1px solid green;
+  border-radius: 20px;
+  padding: 15px 10px;
+}
+#btnStart {
+  background: rgb(44, 156, 0);
+  border: 1px solid green;
+  border-radius: 100%;
+  color: white;
+  font-size: 15px;
+  height: 30px;
+  transition: 0.5s;
+}
+#btnStart:hover {
+  opacity: 0.5;
+  transition: 0.5s;
+}
+#idTable{
+  border: none;
+  border-bottom: 1px solid green;
+  width: 200px;
+  font-size: 15px;
+  font-style: italic;
+  outline:none;
+}
 #errorMessage {
     font-size: 10px;
     color: red;
@@ -22,7 +55,29 @@ input[type="file"] {
 .link{
     background-color: rgba(255, 255, 0, 0.178);
 }
-.switch {
+
+.HeaderBlock{
+  margin: auto;
+  text-align: center;
+  
+}
+.header{
+  color: green;
+  font-family: 'Indie Flower', cursive;
+  font-size: 50px;
+  margin: 0;
+}
+.subheader{
+  color: rgba(0, 128, 0, 0.514);
+  font-size: 25px;
+  margin: 0 15px;
+}
+
+
+
+
+
+  .switch {
     position: relative;
     display: inline-block;
     width: 35px;
@@ -35,6 +90,23 @@ input[type="file"] {
     opacity: 0;
     width: 0;
     height: 0;
+  }
+  .inputsBlock{
+    width: 50%;
+    margin: auto;
+    border: 1px solid green;
+    border-radius: 30px;
+    padding: 10px 40px;
+  }
+  .wrapInputs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 5px;
+  }
+  .descr{
+    font-size: 15px;
+    text-align: center;
   }
   
   /* The slider */
@@ -63,13 +135,14 @@ input[type="file"] {
   }
   
   input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #64f321;
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px #3af321;
   }
-  
+
+
   input:checked + .slider:before {
     -webkit-transform: translateX(13px);
     -ms-transform: translateX(13px);

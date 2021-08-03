@@ -4,22 +4,33 @@
     
   </head>
   <body>
-    <label for="file" class="custom-file-upload">
-        <i class="fa fa-cloud-upload"></i> Upload file
-    </label>
-    <div class="blockInput">
-      <input id="idTable" type="text">
-      <button id = "btnStart">start Srcipt</button>
+    <div class="HeaderBlock">
+      <h2 class="subheader">Wellcome to</h2>
+      <h1 class="header">SupWork</h1>
     </div>
-    <input id="file" type="file" accept=".json">
-    <div class="testBlock">
-      <span>Is test version</span>
-      <label class="switch">
-        <input id = "toggle" type="checkbox">
-        <span class="slider round"></span>
-      </label>
+    <div class="inputsBlock">
+      <h2 class="subheader descr">You can download json file or enter Id for Google Sheet</h2>
+      <div class="wrapInputs">
+        <label for="file" class="custom-file-upload">
+            <i class="fa fa-cloud-upload"></i>
+            <img src="../../assets/icons/iconJson.png" alt="">
+        </label>
+        <input id="file" type="file" accept=".json">
+        <h2 class="subheader">OR</h2>
+        <div class="blockInput">
+          <input id="idTable" type="text">
+          <button id = "btnStart">GO</button>
+        </div>
+      </div> 
+      <div class="testBlock">
+        <span>Is test version</span>
+        <label class="switch">
+          <input id = "toggle" type="checkbox">
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div id="errorMessage"></div>
     </div>
-    <div id="errorMessage"></div>
     <div id="contentBlock"></div>
     <div id = "preview"></div>
     <script defer src="inputWindow.js"></script>
