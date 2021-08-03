@@ -7,7 +7,7 @@
   const idTable = document.getElementById('idTable')
   var url = "https://docs.google.com/spreadsheets/d/1s1KioVJpwUoAZEW8LwCO2QTRrt1UDXn_MOOzfE46qwo/edit?usp=sharing";
   const dataObj = {data:[]}
-  let allItems = ''
+  let allItems = '<h2 class="subheader descr">Result Table</h2>'
   
   fetch(`https://spreadsheets.google.com/feeds/cells/1s1KioVJpwUoAZEW8LwCO2QTRrt1UDXn_MOOzfE46qwo/1/public/full?alt=json`)
   .then((res) => res.json())
@@ -21,6 +21,7 @@
       fetch(`https://spreadsheets.google.com/feeds/cells/${idTable.value}/1/public/full?alt=json`)
       .then((res) => res.json())
       .then((data) => {
+        contentBlock.innerHTML = '<h2 class="subheader descr">Result Table</h2>'
         console.log(data)
         console.log(data.feed.entry)
         let curentRow = 0
@@ -112,12 +113,12 @@
   inputFile.addEventListener("change", async(el) => {
     try {
     const reader = new FileReader();
-    let allItems = ''
+    let allItems = '<h2 class="subheader descr">Result Table</h2>'
     contentBlock.innerHTML = ''
     reader.readAsText(el.target.files[0])
     reader.onload = function() {
       if(JSON.parse(reader.result).hasOwnProperty('data')){
-          errorMessage.innerHTML = ''
+        contentBlock.innerHTML = '<h2 class="subheader descr">Result Table</h2>'
           preview.innerHTML = reader.result
           localStorage.setItem('arr', reader.result)
           let result = JSON.parse(reader.result)

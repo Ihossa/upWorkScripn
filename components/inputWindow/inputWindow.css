@@ -20,6 +20,12 @@ input[type="file"] {
   border-radius: 20px;
   padding: 15px 10px;
 }
+#contentBlock{
+  width: 300px;
+  margin: auto;
+  border: 1px solid green;
+}
+
 #btnStart {
   background: rgb(44, 156, 0);
   border: 1px solid green;
@@ -51,9 +57,13 @@ input[type="file"] {
     width: 20px;
     margin-left: 5px;
     vertical-align: middle;
+    border-left: 1px solid green;
 }
 .link{
     background-color: rgba(255, 255, 0, 0.178);
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid green;
 }
 
 .HeaderBlock{
@@ -93,7 +103,7 @@ input[type="file"] {
   }
   .inputsBlock{
     width: 50%;
-    margin: auto;
+    margin: 50px auto;
     border: 1px solid green;
     border-radius: 30px;
     padding: 10px 40px;
