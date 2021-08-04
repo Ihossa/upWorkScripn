@@ -5,39 +5,73 @@
   const preview = document.getElementById('preview')
   const btnStart = document.getElementById('btnStart')
   const idTable = document.getElementById('idTable')
+  const sheetName = document.getElementById('sheetName')
   var url = "https://docs.google.com/spreadsheets/d/1s1KioVJpwUoAZEW8LwCO2QTRrt1UDXn_MOOzfE46qwo/edit?usp=sharing";
   const dataObj = {data:[]}
   let allItems = '<h2 class="subheader descr">Result Table</h2>'
   
-  fetch(`https://spreadsheets.google.com/feeds/cells/1s1KioVJpwUoAZEW8LwCO2QTRrt1UDXn_MOOzfE46qwo/1/public/full?alt=json`)
-  .then((res) => res.json())
-  .then(data => console.log(data))
+  fetch(`https://docs.google.com/spreadsheets/d/1s1KioVJpwUoAZEW8LwCO2QTRrt1UDXn_MOOzfE46qwo/gviz/tq?sheet=02.08`)
+  .then((res) => res.text())
+  .then(data => {
+    const reg = /\((.+?)\)/
+    let objRes = {};
+    let curentRow = -1
+    objRes.data = reg.exec(data)[1];
+    objRes = JSON.parse(objRes.data)
+    objRes.table.rows.forEach((elRow, index) => {
+      if(index !==0){
+        let indexArr = index-1
+        elRow.c.forEach((elCol, index) => {
+          if(elCol && elCol.v){
+            if(curentRow !== indexArr){
+              curentRow = indexArr
+              dataObj.data[indexArr] = {jobId: '', coverLetter: '', question0: '', question1: ''}
+            }
+            console.log(indexArr)
+            switch(index){
+              case 0: dataObj.data[indexArr].jobId = elCol.v; break;
+              case 1: dataObj.data[indexArr].coverLetter = elCol.v; break;
+              case 2: dataObj.data[indexArr].question0 = elCol.v; break;
+              case 3: dataObj.data[indexArr].question1 = elCol.v; break;
+            }
+          }
+        })
+      }
+    })
+    console.log(dataObj)
+  })
 
   
   btnStart.addEventListener('click', () => {
     contentBlock.innerHTML = ''
     console.dir(idTable.value)
     try{
-      fetch(`https://spreadsheets.google.com/feeds/cells/${idTable.value}/1/public/full?alt=json`)
-      .then((res) => res.json())
-      .then((data) => {
-        contentBlock.innerHTML = '<h2 class="subheader descr">Result Table</h2>'
-        console.log(data)
-        console.log(data.feed.entry)
-        let curentRow = 0
-        data.feed.entry.forEach((el) => {
-          if(el.gs$cell.row !== '1'){
-            let index = el.gs$cell.row - 2;
-            if(curentRow !== el.gs$cell.row){
-              curentRow = el.gs$cell.row
-              dataObj.data[index] = {jobId: '', coverLetter: '', question0: '', question1: ''}
-            }
-            switch(el.gs$cell.col){
-              case '1': dataObj.data[index].jobId = el.content.$t; break;
-              case '2': dataObj.data[index].coverLetter = el.content.$t; break;
-              case '3': dataObj.data[index].question0 = el.content.$t; break;
-              case '4': dataObj.data[index].question1 = el.content.$t; break;
-            }
+      fetch(`https://docs.google.com/spreadsheets/d/${idTable.value}/gviz/tq?sheet=${sheetName.value}`)
+      .then((res) => res.text())
+      .then(data => {
+        const reg = /\((.+?)\)/
+        let objRes = {};
+        let curentRow = -1
+        objRes.data = reg.exec(data)[1];
+        objRes = JSON.parse(objRes.data)
+        objRes.table.rows.forEach((elRow, index) => {
+          if(index !==0){
+            let indexArr = index-1
+            elRow.c.forEach((elCol, index) => {
+              if(elCol && elCol.v){
+                if(curentRow !== indexArr){
+                  curentRow = indexArr
+                  dataObj.data[indexArr] = {jobId: '', coverLetter: '', question0: '', question1: ''}
+                }
+                console.log(indexArr)
+                switch(index){
+                  case 0: dataObj.data[indexArr].jobId = elCol.v; break;
+                  case 1: dataObj.data[indexArr].coverLetter = elCol.v; break;
+                  case 2: dataObj.data[indexArr].question0 = elCol.v; break;
+                  case 3: dataObj.data[indexArr].question1 = elCol.v; break;
+                }
+              }
+            })
           }
         })
         console.log(dataObj)

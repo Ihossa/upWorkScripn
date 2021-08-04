@@ -11,12 +11,18 @@ input[type="file"] {
 .custom-file-upload {
     border: 1px solid rgb(0, 185, 0);
     border-radius: 20px;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 6px 12px;
     cursor: pointer;
+    width: 100px;
+    height: 100px;
 }
 .blockInput{
   border: 1px solid green;
+  display: flex;
+  flex-direction: column;
   border-radius: 20px;
   padding: 15px 10px;
 }
@@ -29,23 +35,24 @@ input[type="file"] {
 #btnStart {
   background: rgb(44, 156, 0);
   border: 1px solid green;
-  border-radius: 100%;
+  border-radius: 10px;
   color: white;
   font-size: 15px;
-  height: 30px;
+  height: 20px;
   transition: 0.5s;
 }
 #btnStart:hover {
   opacity: 0.5;
   transition: 0.5s;
 }
-#idTable{
+#idTable, #sheetName{
   border: none;
   border-bottom: 1px solid green;
-  width: 200px;
+  width: 300px;
   font-size: 15px;
   font-style: italic;
   outline:none;
+  margin-bottom: 10px;
 }
 #errorMessage {
     font-size: 10px;
