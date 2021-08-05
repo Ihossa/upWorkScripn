@@ -8,6 +8,7 @@
   const sheetName = document.getElementById('sheetName')
   const select = document.getElementById('select')
   const blockInput = document.getElementById('blockInput')
+  const regectReq = document.getElementById('regectReq')
   var url = "https://docs.google.com/spreadsheets/d/1s1KioVJpwUoAZEW8LwCO2QTRrt1UDXn_MOOzfE46qwo/edit?usp=sharing";
   const dataObj = {data:[]}
   let allItems = '<h2 class="subheader descr">Result Table</h2>'
@@ -16,6 +17,7 @@
 
   idTable.addEventListener('input', (el) => {
     errorMessage.innerHTML = ''
+    regectReq.innerHTML = ''
     if(el.target.value.length === 44){
       fetch(`https://docs.google.com/spreadsheets/d/${el.target.value}/edit?usp=sharing`)
       .then((res) => res.text())
@@ -29,8 +31,9 @@
         select.innerHTML = options
         select.style.display="block"
         btnStart.style.display="block"
+      }).catch((error) => {
+        regectReq.innerHTML = 'Enter correct table ID'
       });
-
     }
   })
   
@@ -38,59 +41,56 @@
   btnStart.addEventListener('click', () => {
     contentBlock.innerHTML = ''
     console.dir(select.value)
-    try{
-      fetch(`https://docs.google.com/spreadsheets/d/${idTable.value}/gviz/tq?sheet=${select.value}`)
-      .then(res => res.ok ? res : Promise.reject(res))
-      .then((res) => res.text())
-      .then(data => {
-        const reg = /\((.+?)\)/
-        let objRes = {};
-        let curentRow = -1
-        objRes.data = reg.exec(data)[1];
-        objRes = JSON.parse(objRes.data)
-        objRes.table.rows.forEach((elRow, index) => {
-          if(index !==0){
-            let indexArr = index-1
-            elRow.c.forEach((elCol, index) => {
-              if(elCol && elCol.v){
-                if(curentRow !== indexArr){
-                  curentRow = indexArr
-                  dataObj.data[indexArr] = {jobId: '', coverLetter: '', question0: '', question1: ''}
-                }
-                console.log(indexArr)
-                switch(index){
-                  case 0: dataObj.data[indexArr].jobId = elCol.v; break;
-                  case 1: dataObj.data[indexArr].coverLetter = elCol.v; break;
-                  case 2: dataObj.data[indexArr].question0 = elCol.v; break;
-                  case 3: dataObj.data[indexArr].question1 = elCol.v; break;
-                }
+    fetch(`https://docs.google.com/spreadsheets/d/${idTable.value}/gviz/tq?sheet=${select.value}`)
+    .then((res) => res.text())
+    .then(data => {
+      const reg = /\((.+?)\)/
+      let objRes = {};
+      let curentRow = -1
+      objRes.data = reg.exec(data)[1];
+      objRes = JSON.parse(objRes.data)
+      objRes.table.rows.forEach((elRow, index) => {
+        if(index !==0){
+          let indexArr = index-1
+          elRow.c.forEach((elCol, index) => {
+            if(elCol && elCol.v){
+              if(curentRow !== indexArr){
+                curentRow = indexArr
+                dataObj.data[indexArr] = {jobId: '', coverLetter: '', question0: '', question1: ''}
               }
-            })
-          }
-        })
-        console.log(dataObj)
-        dataObj.checked = toggle.checked;
-        let stringifyRes = JSON.stringify(dataObj)
-        console.log(stringifyRes)
-        chrome.runtime.sendMessage(stringifyRes);
-        // chrome.runtime.sendMessage(stringifyRes);
-        dataObj.data.forEach((el) => {
-        allItems += `<div class = "link" >${el.jobId}<img class = "image wait" src = "../../assets/icons/wait.png"></div>`
-        })
-        contentBlock.innerHTML = allItems;
-        setTimeout(() => {
-          document.querySelectorAll('.link').forEach((el) => {
-            if(el.lastElementChild.classList[1] === 'wait'){
-              el.style.background = "#ce545441"
-              el.children[0].style.display = 'none'
-              el.innerHTML += '<img class = "image err" src = "../../assets/icons/error.png"  />'
+              console.log(indexArr)
+              switch(index){
+                case 0: dataObj.data[indexArr].jobId = elCol.v; break;
+                case 1: dataObj.data[indexArr].coverLetter = elCol.v; break;
+                case 2: dataObj.data[indexArr].question0 = elCol.v; break;
+                case 3: dataObj.data[indexArr].question1 = elCol.v; break;
+              }
             }
           })
-        }, 20000)
+        }
       })
-    } catch{
-      errorMessage.innerHTML = '<span>Incorrect table ID, Please enter correct</span>'
-    }
+      console.log(dataObj)
+      dataObj.checked = toggle.checked;
+      let stringifyRes = JSON.stringify(dataObj)
+      console.log(stringifyRes)
+      chrome.runtime.sendMessage(stringifyRes);
+      // chrome.runtime.sendMessage(stringifyRes);
+      dataObj.data.forEach((el) => {
+      allItems += `<div class = "link" >${el.jobId}<img class = "image wait" src = "../../assets/icons/wait.png"></div>`
+      })
+      contentBlock.innerHTML = allItems;
+      setTimeout(() => {
+        document.querySelectorAll('.link').forEach((el) => {
+          if(el.lastElementChild.classList[1] === 'wait'){
+            el.style.background = "#ce545441"
+            el.children[0].style.display = 'none'
+            el.innerHTML += '<img class = "image err" src = "../../assets/icons/error.png"  />'
+          }
+        })
+      }, 20000)
+    }).catch((error) => {
+      regectReq.innerHTML = 'OOps bad request'
+    });
   })
 
 
