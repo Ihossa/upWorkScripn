@@ -6,47 +6,41 @@
   const btnStart = document.getElementById('btnStart')
   const idTable = document.getElementById('idTable')
   const sheetName = document.getElementById('sheetName')
+  const select = document.getElementById('select')
+  const blockInput = document.getElementById('blockInput')
   var url = "https://docs.google.com/spreadsheets/d/1s1KioVJpwUoAZEW8LwCO2QTRrt1UDXn_MOOzfE46qwo/edit?usp=sharing";
   const dataObj = {data:[]}
   let allItems = '<h2 class="subheader descr">Result Table</h2>'
   
-  fetch(`https://docs.google.com/spreadsheets/d/1s1KioVJpwUoAZEW8LwCO2QTRrt1UDXn_MOOzfE46qwo/gviz/tq?sheet=02.08`)
-  .then((res) => res.text())
-  .then(data => {
-    const reg = /\((.+?)\)/
-    let objRes = {};
-    let curentRow = -1
-    objRes.data = reg.exec(data)[1];
-    objRes = JSON.parse(objRes.data)
-    objRes.table.rows.forEach((elRow, index) => {
-      if(index !==0){
-        let indexArr = index-1
-        elRow.c.forEach((elCol, index) => {
-          if(elCol && elCol.v){
-            if(curentRow !== indexArr){
-              curentRow = indexArr
-              dataObj.data[indexArr] = {jobId: '', coverLetter: '', question0: '', question1: ''}
-            }
-            console.log(indexArr)
-            switch(index){
-              case 0: dataObj.data[indexArr].jobId = elCol.v; break;
-              case 1: dataObj.data[indexArr].coverLetter = elCol.v; break;
-              case 2: dataObj.data[indexArr].question0 = elCol.v; break;
-              case 3: dataObj.data[indexArr].question1 = elCol.v; break;
-            }
-          }
-        })
-      }
-    })
-    console.log(dataObj)
-  })
-
   
+
+  idTable.addEventListener('input', (el) => {
+    errorMessage.innerHTML = ''
+    if(el.target.value.length === 44){
+      fetch(`https://docs.google.com/spreadsheets/d/${el.target.value}/edit?usp=sharing`)
+      .then((res) => res.text())
+      .then(data => {
+        let options = ''
+        const re = /(?<=<div class="goog-inline-block docs-sheet-tab-caption">)[\s\S]*?(?=<\/div>)/g
+        let result = data.match(re)
+        result.forEach(el => {
+          options += `<option value=${el}>${el}</option>`
+        })
+        select.innerHTML = options
+        select.style.display="block"
+        btnStart.style.display="block"
+      });
+
+    }
+  })
+  
+
   btnStart.addEventListener('click', () => {
     contentBlock.innerHTML = ''
-    console.dir(idTable.value)
+    console.dir(select.value)
     try{
-      fetch(`https://docs.google.com/spreadsheets/d/${idTable.value}/gviz/tq?sheet=${sheetName.value}`)
+      fetch(`https://docs.google.com/spreadsheets/d/${idTable.value}/gviz/tq?sheet=${select.value}`)
+      .then(res => res.ok ? res : Promise.reject(res))
       .then((res) => res.text())
       .then(data => {
         const reg = /\((.+?)\)/
