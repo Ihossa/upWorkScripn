@@ -2,10 +2,8 @@
 let timer = 0;
 const ev = new Event('input');
 const setStatus = (el) => {
-   console.log(el)
 }
     chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-       console.log(message);
        message.data.forEach((el) => {
          const setValue = (idInput) => {
             document.querySelector(`#${idInput}`).value = el[idInput]
@@ -26,11 +24,6 @@ const setStatus = (el) => {
                      if(document.querySelector("#question1")){
                         setValue("question1")
                      }
-
-                     console.dir(document.querySelector('.air-icon-exclamation'))
-                     // document.querySelector("#main > div.ng-scope > div > div > form > div > div:nth-child(5) > section > div > up-c-dropdown > div > up-c-on-media-change > up-c-on-click-outside > up-c-transition > div > up-c-dropdown-toggle > button").click()
-                     console.dir(document.querySelectorAll("up-c-dropdown")[0])
-
                      if(message.checked){
                         console.log('is Test version')
                      }else{
@@ -44,7 +37,6 @@ const setStatus = (el) => {
                      return 'done'
                   }else{
                      if(timer < 60000){
-                        console.log(timer)
                         let promise = new Promise((res) => {
                            setTimeout(() => {
                                  res(sendMessage())
@@ -54,14 +46,12 @@ const setStatus = (el) => {
                         
                         return promise
                      }
-                     console.log(timer)
                      return 'rej'
                   }
                }
                return await sendMessage()
             }
             updateState().then(data => {
-               console.log(data)
                chrome.runtime.sendMessage({el:el.jobId, status: data})
             })
             

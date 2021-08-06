@@ -10,7 +10,6 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 });
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if(message.hasOwnProperty('el')){
-    console.log(message)
     chrome.tabs.query({active: true, currentWindow: true},function(tabs) {
       chrome.runtime.sendMessage({
         msg: "something_completed", 
