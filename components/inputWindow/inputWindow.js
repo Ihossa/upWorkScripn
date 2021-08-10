@@ -19,9 +19,15 @@
     errorMessage.innerHTML = ''
     regectReq.innerHTML = ''
     if(el.target.value.length === 44){
-      fetch(`https://docs.google.com/spreadsheets/d/${el.target.value}/edit?usp=sharing`)
+      fetch(`https://docs.google.com/spreadsheets/d/${el.target.value}/edit?usp=sharing`, {
+        headers: {
+          'GData-Version': 3.0,
+          'Authorization': `Bearer AIzaSyA_nuJngcWqDJrd9Pfo6jVGhiR4Ht9oes4`
+        }
+      })
       .then((res) => res.text())
       .then(data => {
+        console.log(data)
         let options = ''
         const re = /(?<=<div class="goog-inline-block docs-sheet-tab-caption">)[\s\S]*?(?=<\/div>)/g
         let result = data.match(re)
@@ -32,6 +38,7 @@
         select.style.display="block"
         btnStart.style.display="block"
       }).catch((error) => {
+        console.log(error)
         regectReq.innerHTML = 'Enter correct table ID'
       });
     }
@@ -43,6 +50,7 @@
     fetch(`https://docs.google.com/spreadsheets/d/${idTable.value}/gviz/tq?sheet=${select.value}`)
     .then((res) => res.text())
     .then(data => {
+      console.log(data)
       const reg = /\((.+?)\);/
       let objRes = {};
       let curentRow = -1
@@ -80,8 +88,7 @@
           document.querySelectorAll('.link').forEach((el) => {
             if(el.lastElementChild.classList[1] === 'wait'){
               el.style.background = "#ce545441"
-              el.children[0].style.display = 'none'
-              el.innerHTML += '<img class = "image err" src = "../../assets/icons/error.png"  />'
+              el.children[0].outerHTML = '<img class = "image err" src = "../../assets/icons/error.png"  />'
             }
           })
         }, 20000)
@@ -101,12 +108,10 @@
                 if(el.textContent === request.data.content.el){
                   if(request.data.content.status === 'done' && el.lastElementChild.classList[1] !== 'done'){
                     el.style.background = "#bbffb9"
-                    el.children[0].style.display = 'none'
-                    el.innerHTML += '<img class = "image done" src = "../../assets/icons/done.png"  />'
+                    el.children[0].outerHTML = '<img class = "image done" src = "../../assets/icons/done.png"  />'
                   }else{
                     el.style.background = "#ce545441"
-                    el.children[0].style.display = 'none'
-                    el.innerHTML += '<img class = "image err" src = "../../assets/icons/error.png"  />'
+                    el.children[0].outerHTML = '<img class = "image err" src = "../../assets/icons/error.png"  />'
                   }
                 }
             })
