@@ -19,12 +19,13 @@
     errorMessage.innerHTML = ''
     regectReq.innerHTML = ''
     if(el.target.value.length === 44){
-      fetch(`https://docs.google.com/spreadsheets/d/${el.target.value}/edit?usp=sharing`, {
-        headers: {
-          'GData-Version': 3.0,
-          'Authorization': `Bearer AIzaSyA_nuJngcWqDJrd9Pfo6jVGhiR4Ht9oes4`
-        }
-      })
+      fetch(`https://docs.google.com/spreadsheets/d/${el.target.value}/edit?usp=sharing`)
+      // {
+      //   headers: {
+      //     Authorization: `Bearer ya29.a0ARrdaM_Kw-88TbJbvpZ_BnsMEyYFIPOQI2gDuBWTMh_BjA5BWGPlJodVG0m82CCenD8DxMiEGtdup_96qCXIUR2Ytg3t3NSGqStjpEbT6fV7Arpfqoy5sQEYaDKEiNt0slBsmmRYxS1voAr2NA2EPtgRNDD5`
+      //   }
+      // }
+      
       .then((res) => res.text())
       .then(data => {
         console.log(data)
