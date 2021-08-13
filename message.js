@@ -24,8 +24,10 @@ const setStatus = (el) => {
                      if(document.querySelector("#question1")){
                         setValue("question1")
                      }
+                     chrome.runtime.sendMessage({el:el.jobId, status: 'copy'})
                      if(message.checked){
                         console.log('is Test version')
+                        return
                      }else{
                         document.querySelector("footer > a.btn.btn-primary.m-0.ng-scope").click()
                      }
@@ -46,7 +48,7 @@ const setStatus = (el) => {
                         
                         return promise
                      }
-                     return 'rej'
+                     return new Promise((res) => res('rej'))
                   }
                }
                return await sendMessage()

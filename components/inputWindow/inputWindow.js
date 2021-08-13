@@ -108,15 +108,13 @@
         if (request.msg === "something_completed") {
           
           contentBlock.childNodes.forEach((el) => {
-                if(el.textContent === request.data.content.el){
-                  if(request.data.content.status === 'done'){
-                    el.style.background = "#bbffb9"
-                    el.children[0].outerHTML = '<img class = "image done" src = "../../assets/icons/done.png"  />'
-                  }else{
-                    el.style.background = "#ce545441"
-                    el.children[0].outerHTML = '<img class = "image err" src = "../../assets/icons/error.png"  />'
-                  }
+              if(el.textContent === request.data.content.el){
+                switch(request.data.content.status){
+                  case 'done': el.style.background = "#bbffb9"; el.children[0].outerHTML = '<img class = "image done" src = "../../assets/icons/done.png"  />'; break;
+                  case 'copy': el.style.background = "#abcdef"; el.children[0].outerHTML = '<img class = "image copy" src = "../../assets/icons/copy.png"  />'; break;
+                  case 'rej': el.style.background = "#ce545441"; el.children[0].outerHTML = '<img class = "image err" src = "../../assets/icons/error.png"  />';break;
                 }
+              }
             })
         }
     }
