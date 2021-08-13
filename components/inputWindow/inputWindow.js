@@ -82,7 +82,7 @@
         let stringifyRes = JSON.stringify(dataObj)
         chrome.runtime.sendMessage(stringifyRes);
         dataObj.data.forEach((el) => {
-        allItems += `<div class = "link" >${el.jobId}<img class = "image wait" src = "../../assets/icons/wait.png"></div>`
+          allItems += `<div class = "link" >${el.jobId}<img class = "image wait" src = "../../assets/icons/wait.png"></div>`
         })
         contentBlock.innerHTML = allItems;
         setTimeout(() => {
@@ -104,10 +104,12 @@
 
   chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
+      console.log(request)
         if (request.msg === "something_completed") {
+          
           contentBlock.childNodes.forEach((el) => {
                 if(el.textContent === request.data.content.el){
-                  if(request.data.content.status === 'done' && el.lastElementChild.classList[1] !== 'done'){
+                  if(request.data.content.status === 'done'){
                     el.style.background = "#bbffb9"
                     el.children[0].outerHTML = '<img class = "image done" src = "../../assets/icons/done.png"  />'
                   }else{

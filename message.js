@@ -54,8 +54,6 @@ const setStatus = (el) => {
             updateState().then(data => {
                chrome.runtime.sendMessage({el:el.jobId, status: data})
             })
-            
-            
           }
          
        })
