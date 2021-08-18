@@ -14,6 +14,16 @@
   let allItems = '<h2 class="subheader descr">Result Table</h2>'
   
   
+  // fetch('http://localhost:3000/v1/jobs/?page=0&limit=12&sortBy=title:asc',{
+  //   mode: "no-cors",
+  //   headers: {
+  //     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFiN2EzNjNkLWJiYTEtNDcwOC04ZjAzLWE3NzljYjJlNGRlOCIsInN0YXR1cyI6ImFjdGl2ZSIsImlhdCI6MTYyOTI5MjEwNywiZXhwIjoxNjI5Mjk1NzA3fQ.0Q-X0jhxaKNGu24YYArrctSlR8iesWUr0Rsv_bXO9Tc"
+  //   }
+  // })
+  // .then((res) => res.json())
+  // .then(data => {
+  //   console.log(data)
+  // })
 
   idTable.addEventListener('input', (el) => {
     errorMessage.innerHTML = ''

@@ -1,10 +1,23 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="button.css">
+    <link rel="stylesheet" href="popup.css">
     
   </head>
   <body>
-    <button id="changeColor">Start</button>
+    <h1 class="headLine">Hello, do you want:</h1>
+    <button id="changeColor">use the public version</button>
+    <hr/>
+    <h1 class="headLine">OR</h1>
+    <hr/>
+    <div class="wrapForm">
+      <h1 class="title">use the version for registered users</h1>
+      <input id="email" type="text" placeholder="Enter Email">
+      <span id="errorEmail">enter correct email</span>
+      <input id="password" type="text" placeholder="Enter Password">
+      <span id="errorPassword">enter correct password</span>
+      <button id="getStartBtn">get start</button>
+    </div>
     <script src="popup.js"></script>
   </body>
 </html>

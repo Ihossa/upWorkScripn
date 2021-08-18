@@ -1,0 +1,57 @@
+body{
+  background-color: rgba(252, 252, 252, 0.822);
+  border-radius: 100%;
+  text-align: center;
+  width: 250px;
+}
+.wrapForm{
+  border: 1px solid green;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: left;
+}
+
+.headLine{
+  color: rgba(0, 128, 0, 0.514);
+  font-size: 17px;
+}
+.title{
+  color: green;
+  font-size: 17px;
+  margin: 0;
+  text-align: center;
+}
+#email, #password{
+  width: 100%;
+  font-size: 15px;
+  font-style: italic;
+  background: none;
+  margin-top:10px;
+  border: none;
+  border-bottom: 1px solid green;
+  outline: none;
+}
+#errorEmail, #errorPassword{
+  visibility: hidden;
+  color: red;
+  font-size: 10px;
+  font-style: italic;
+}
+#changeColor, #getStartBtn{
+  background: rgb(44, 156, 0);
+  border: 1px solid green;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  transition: 0.5s;
+  padding: 10px;
+  width: 100%;
+}
+#getStartBtn{
+  padding: 5px;
+  margin-top:10px;
+}
+#changeColor:hover, #getStartBtn:hover {
+  opacity: 0.5;
+  transition: 0.5s;
+}
