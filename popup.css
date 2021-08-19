@@ -37,6 +37,16 @@ body{
   font-size: 10px;
   font-style: italic;
 }
+
+#resError{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid red;
+  color: red;
+  font-size: 15px;
+  display: none;
+}
 #changeColor, #getStartBtn{
   background: rgb(44, 156, 0);
   border: 1px solid green;
