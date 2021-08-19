@@ -157,7 +157,7 @@
                 el.innerHTML += '<img class = "image err" src = "../../assets/icons/error.png"  />'
               }
             })
-          }, 20000)
+          }, 30000)
       } else {
           errorMessage.innerHTML = '<span>download the correct JSON file</span>'
       }

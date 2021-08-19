@@ -7,9 +7,27 @@ getStartBtn.addEventListener("click", async() => {
   if(!resPass){errorPassword.style.visibility = 'visible'}
 
   if(resEmail && resPass){
-    chrome.tabs.create({
-      url: './components/inputWindow/inputWindow.html'
-    });
+  
+    var data = new FormData();
+    fetch('http://localhost:3000/v1/auth/signIn', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        // your expected POST request payload goes here
+        email: "ihor.shymkov@gmail.com",
+        password: "Admin123Ihor"
+          })
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data)
+    })
+
+    // chrome.tabs.create({
+    //   url: './components/inputWindow/inputWindow.html'
+    // });
   }
 })
 
