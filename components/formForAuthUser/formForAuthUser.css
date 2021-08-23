@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap');
+
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid rgb(0, 185, 0);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 12px;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+}
+#blockInput{
+  border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 15px 10px;
+}
+
+#wrapTable{
+  margin: auto;
+  border: 1px solid green;
+  border-radius: 20px;
+  padding: 0 15px;
+}
+#total{
+  display: flex;
+  justify-content: space-between;
+}
+#selectPage{
+  border: none;
+  outline: none;
+}
+.tableJob{
+  width: 100%;
+}
+.colHeader{
+  border-bottom: 1px solid green;
+  text-align: center;
+  font-family: 'Indie Flower', cursive;
+  color: #3af321;
+  margin: 0;
+}
+.col{
+  text-align: center;
+  border-bottom: 1px solid black;
+  margin: 0;
+}
+#contentBlock{
+  width: 300px;
+  margin: auto;
+  border: 1px solid green;
+}
+
+#btnStart {
+  background: rgb(44, 156, 0);
+  width: 30%;
+  border: 1px solid green;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  height: 20px;
+  transition: 0.5s;
+  margin: 10px;
+}
+#btnStart:hover {
+  opacity: 0.5;
+  transition: 0.5s;
+}
+option:hover {
+  background-color: yellow;
+}
+#idTable, #select{
+  border: none;
+  border-bottom: 1px solid green;
+  width: 300px;
+  font-size: 15px;
+  font-style: italic;
+  outline:none;
+  margin-bottom: 10px;
+}
+#select{
+  display: none;
+}
+#errorMessage {
+    font-size: 10px;
+    color: red;
+    font-style: italic;
+    text-decoration: underline;
+}
+.image{
+    width: 20px;
+    margin-left: 5px;
+    vertical-align: middle;
+    border-left: 1px solid green;
+}
+.link{
+    background-color: rgba(255, 255, 0, 0.178);
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid green;
+}
+
+.HeaderBlock{
+  margin: auto;
+  text-align: center;
+  
+}
+.header{
+  color: green;
+  font-family: 'Indie Flower', cursive;
+  font-size: 50px;
+  margin: 0;
+}
+.subheader{
+  color: rgba(0, 128, 0, 0.514);
+  font-size: 25px;
+  margin: 0 15px;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 35px;
+  height: 20px;
+  margin-left: 5px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.inputsBlock{
+  width: 50%;
+  margin: 50px auto;
+  border: 1px solid green;
+  border-radius: 30px;
+  padding: 10px 40px;
+}
+.wrapInputs{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 5px;
+}
+.descr{
+  font-size: 15px;
+  text-align: center;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #64f321;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #3af321;
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.testBlock{
+    margin-top: 10px;
+    display: flex;
+    text-align: center;
+}

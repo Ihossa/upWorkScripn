@@ -22,6 +22,7 @@ getStartBtn.addEventListener("click", async() => {
     .then((res) => res.json())
     .then((data) => {
       if(data.hasOwnProperty('token')){
+        chrome.runtime.sendMessage(data);
         console.log(data)
       }else{
         resError.style.display = 'flex'
