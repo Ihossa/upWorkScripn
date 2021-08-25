@@ -84,7 +84,7 @@
         contentBlock.outherHTML = ''
         let allItems = '<h2 class="subheader descr">Result Table</h2>'
         data.data.forEach((el) => {
-          if(el.sendStatus !== "Done"){
+          if(el.sendStatus !== "Done" && el.coverLetter){
             let idElement = el.id.slice(1)
             dataObj.data.push({jobId: idElement, coverLetter: el.coverLetter, question0: '', question1: '', question2: ''})
           }
