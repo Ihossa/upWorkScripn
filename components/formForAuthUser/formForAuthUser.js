@@ -8,6 +8,7 @@
  
   let token = {}
   let selectOptions = ""
+  let curentPage = 0
   const dataObj = {data:[]}
 
  const findCoverLetterByID = (arr, id) => {
@@ -21,8 +22,10 @@
    return coverLetter
  }
 
+ 
+
  const createTable = () => {
-    fetch('http://localhost:3000/v1/jobs/?page=0&limit=12&sortBy=title:asc',{
+    fetch(`http://localhost:3000/v1/jobs/?page=${curentPage}&limit=12&sortBy=title:asc`,{
       headers: {
         "Authorization": `Bearer ${token.token}`
       }
@@ -63,6 +66,10 @@
         </div>
       </div>
       `
+      selectPage.addEventListener("change", () => {
+        curentPage = selectPage.value -1;
+        createTable()
+      })
       btnStart.addEventListener("click", () => {
         contentBlock.outherHTML = ''
         let allItems = '<h2 class="subheader descr">Result Table</h2>'
@@ -93,6 +100,19 @@
       console.log(error)
     });
 }
+// const refreshTocken = () => {
+//   console.log(token)
+//   fetch(`http://localhost:3000/v1/auth/refresh?refreshToken=${localStorage.getItem("RefreshToken")}`)
+//   .then(res => res.json())
+//   .then(data => {
+//     token = data;
+//   })
+//   .catch(err => {
+//     console.log(err)
+//   })
+//   createTable()
+  
+// }
 
   chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
@@ -100,12 +120,18 @@
       if(request.msg === 'token'){
         // localStorage.setItem('authToken', request.data.content.token)
         token = request.data.content
+        localStorage.setItem("RefreshToken", token.refreshToken)
         console.log(token)
         createTable()
       }
     }
   );
-
+  chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+      if(Object.keys(request).length === 0){
+        refreshTocken()
+      }
+    })
   chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
       console.log(request)
