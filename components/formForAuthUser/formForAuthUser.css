@@ -22,6 +22,10 @@ input[type="file"] {
   border-radius: 20px;
   padding: 15px 10px;
 }
+.countJob{
+  display: block;
+  font-size: 10px;
+}
 
 #wrapTable{
   margin: auto;

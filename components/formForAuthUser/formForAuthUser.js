@@ -33,18 +33,24 @@
     .then((res) => res.json())
     .then(data => {
       console.log(data)
+      let countElements = 0
+      let vacantElements = 0
       let countPages = Math.ceil(data.pagination.total/12)
       let listJob = ""
       for(let i = 0; i < countPages; i++){
         selectOptions += `<option value = ${i+1} >${i+1}</option>`
       }
       data.data.forEach((element, index) => {
-        console.log(element)
-        listJob += `<tr class = "row">
-          <td class = "col">${index}</td>
-          <td class = "col">${element.id}</td>
-          <td class = "col">${element.sendStatus}</td>
-        </tr>`
+        if(element.sendStatus){
+          countElements++;
+          element.sendStatus !== "Done" && vacantElements++
+          console.log(element)
+          listJob += `<tr class = "row">
+            <td class = "col">${index}</td>
+            <td class = "col">${element.id}</td>
+            <td class = "col">${element.sendStatus}</td>
+          </tr>`
+        }
       });
       wrapTable.innerHTML = `
       <table class = "tableJob">
@@ -56,7 +62,11 @@
         ${listJob}
       </table>
       <div id="total">
-        <span>count job: ${data.pagination.total}</span>
+        <div>
+          <span class = "countJob">count all job: ${data.pagination.total}</span>
+          <span class = "countJob">count job with message: ${countElements}</span>
+          <span class = "countJob">count vacant job: ${vacantElements}</span>
+        </div>  
         <button id = "btnStart">GO</button>
         <div>
           <span>Curent page</span>
